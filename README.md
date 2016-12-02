@@ -19,3 +19,5 @@ Lastly, it contains the icon and a stubbed desktop file.
 to do everything for you, why not just do it manually?! Seriously though, you
 can still use snapcraft to build this, but at that point it just acts like a
 fancy mksquashfs, and an extra dependency at that.
+
+[snap]: http://snapcraft.io/
