@@ -1,0 +1,3 @@
+^snap/love-prepared/
+^snap/love_.*\.snap$
+^tarball/love-.*\.tar\.gz$
