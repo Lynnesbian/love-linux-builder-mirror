@@ -1,0 +1,35 @@
+name: love
+version: "%VERSION%"
+architectures:
+    - amd64
+summary: The unquestionably awesome 2D game engine
+description: |
+    LÖVE was created to be a user-friendly engine in which simple (or
+    complicated) games could be made without having extensive knowledge
+    of system or graphics functions and without having to dedicate time
+    towards developing the same engine features time and time again.
+
+    Developed with cross-platform implementation in mind, it utilizes the
+    latest open source libraries to deliver a similar game experience,
+    independent of operating system. By relying on the Lua scripting language
+    for game-specific programming, it allows even the novice game creator to
+    quickly and efficiently develop an idea into a fully working game.
+
+confinement: devmode
+grade: devel
+
+apps:
+    love:
+        command: love
+        plugs:
+            - network
+            - network-bind
+            - opengl
+            - pulseaudio
+            - screen-inhibit-control
+            - x11
+
+parts:
+    love:
+        plugin: dump
+        source: love-prepared/.
