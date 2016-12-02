@@ -20,6 +20,9 @@ to do everything for you, why not just do it manually?! Seriously though, you
 can still use snapcraft to build this, but at that point it just acts like a
 fancy mksquashfs, and an extra dependency at that.
 
+NOTE: I haven't been able to run the built snaps yet, but that seems to be a
+driver issue, possibly related to Arch Linux. Let me know if it works for you!
+
 ## appimage ##
 `appimage` builds [AppImages][AppImage], unsurprisingly. It uses binaries from
 [AppImageKit][], though you can build them yourself if you want to. And hey,
