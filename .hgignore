@@ -1,3 +1,6 @@
 ^snap/love-prepared/
 ^snap/love_.*\.snap$
 ^tarball/love-.*\.tar\.gz$
+^appimage/love-prepared/
+^appimage/.*\.AppImage$
+^appimage/AppRun$

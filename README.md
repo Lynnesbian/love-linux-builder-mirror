@@ -20,4 +20,11 @@ to do everything for you, why not just do it manually?! Seriously though, you
 can still use snapcraft to build this, but at that point it just acts like a
 fancy mksquashfs, and an extra dependency at that.
 
+## appimage ##
+`appimage` builds [AppImages][AppImage], unsurprisingly. It uses binaries from
+[AppImageKit][], though you can build them yourself if you want to. And hey,
+this actually seems to work, too!
+
 [snap]: http://snapcraft.io/
+[AppImage]: http://appimage.org/
+[AppImageKit]: https://github.com/probonopd/AppImageKit
