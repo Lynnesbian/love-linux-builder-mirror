@@ -13,3 +13,9 @@ build. It also creates a small wrapper script that does the correct search path
 manipulations to be able to run the build.
 
 Lastly, it contains the icon and a stubbed desktop file.
+
+## snap ##
+`snap` builds.. well, a [snap][]. Instead of using fancy build tools that try
+to do everything for you, why not just do it manually?! Seriously though, you
+can still use snapcraft to build this, but at that point it just acts like a
+fancy mksquashfs, and an extra dependency at that.
