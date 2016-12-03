@@ -4,3 +4,6 @@
 ^appimage/love-prepared/
 ^appimage/.*\.AppImage$
 ^appimage/AppRun$
+^flatpak/repo/
+^flatpak/files/
+^flatpak/export/

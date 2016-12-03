@@ -28,6 +28,15 @@ driver issue, possibly related to Arch Linux. Let me know if it works for you!
 [AppImageKit][], though you can build them yourself if you want to. And hey,
 this actually seems to work, too!
 
+## flatpak ##
+`flatpak` is used to build [flatpak][] "packages". It requires the flatpak
+command line tool. Of course flatpak has some kind of repo system, so you can't
+easily distribute a flatpak file. Useful.
+
+NOTE: Once again driver issues (blame nvidia) prevent me from testing this
+myself. If you get it working, let me know!
+
 [snap]: http://snapcraft.io/
 [AppImage]: http://appimage.org/
 [AppImageKit]: https://github.com/probonopd/AppImageKit
+[flatpak]: http://flatpak.org/
