@@ -43,4 +43,4 @@ mkdir -p lib/GL
 cd ..
 #rm -rf repo
 flatpak build-export repo . ${VERSION}
-flatpak build-bundle repo love-${VERSION}-x86_64.flatpak org.love2d.love
+flatpak build-bundle repo love-${VERSION}-x86_64.flatpak org.love2d.love $VERSION
