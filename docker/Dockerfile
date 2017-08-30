@@ -1,0 +1,22 @@
+FROM debian:wheezy
+
+# Install all sdl, love (build) deps and love-linux-builder deps
+RUN apt-get update && apt-get install -y build-essential libgl1-mesa-glx libgles2-mesa-dev libxrandr-dev libdbus-1-dev libxi-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libibus-1.0-dev libasound2-dev libpulse-dev libwayland-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config
+
+# Now build sdl
+ADD SDL2-2.0.5.tar.gz /tmp/
+RUN cd /tmp/SDL2-2.0.5 && ./configure --prefix=/usr && make all install
+
+# And build luajit
+ADD LuaJIT-2.0.5.tar.gz /tmp/
+RUN cd /tmp/LuaJIT-2.0.5 && make all install
+
+# Add the build script
+ADD build.sh /build/
+
+# Add the volumes, the first the love-linux-builder (mandatory), the second the love source (optional)
+RUN mkdir -p /build/love-linux-builder /build/love
+VOLUME /build/love-linux-builder /build/love
+
+# Finally, set the build script as entrypoint
+ENTRYPOINT ["/build/build.sh"]

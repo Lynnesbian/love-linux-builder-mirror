@@ -36,6 +36,20 @@ easily distribute a flatpak file. Useful.
 NOTE: Once again driver issues (blame nvidia) prevent me from testing this
 myself. If you get it working, let me know!
 
+## docker ##
+`docker` does not build docker images. Instead it builds a docker image so you
+can build portable packages yourself!
+
+To build the container, you need to download the relevant SDL2 and LuaJIT
+source packages (and possibly update the references in the Dockerfile).
+
+To use the container, run it as an application, mounting this repo as
+/build/love-linux-builder. You can optionally mount love source at /build/love,
+and if no source is provided it clones the repo and checks out the specified
+version. Note that the container requires exactly one argument: the version.
+This can be an arbitrary string, but for cloning to work it needs to be a tag,
+branch or commit.
+
 [snap]: http://snapcraft.io/
 [AppImage]: http://appimage.org/
 [AppImageKit]: https://github.com/probonopd/AppImageKit
