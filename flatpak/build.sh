@@ -2,13 +2,15 @@
 
 set -eo >/dev/null
 
+ARCH="$(uname -m)"
+
 if [[ $# -lt 1 ]]; then
 	echo "Usage: $0 <version>"
 	exit 0
 fi
 
 VERSION="$1"
-if ! test -f ../tarball/love-${VERSION}-amd64.tar.gz; then
+if ! test -f ../tarball/love-${VERSION}-${ARCH}.tar.gz; then
 	echo "No tarball found for $VERSION"
 	exit 1
 fi
@@ -21,7 +23,7 @@ fi
 # Extract the tarball build into a folder
 rm -rf files
 mkdir files
-tar xf ../tarball/love-${VERSION}-amd64.tar.gz -C files --strip-components=1
+tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C files --strip-components=1
 
 cd files
 
@@ -43,4 +45,4 @@ mkdir -p lib/GL
 cd ..
 #rm -rf repo
 flatpak build-export repo . ${VERSION}
-flatpak build-bundle repo love-${VERSION}-x86_64.flatpak org.love2d.love $VERSION
+flatpak build-bundle repo love-${VERSION}-${ARCH}.flatpak org.love2d.love $VERSION

@@ -2,13 +2,15 @@
 
 set -eo >/dev/null
 
+ARCH="$(uname -m)"
+
 if [[ $# -lt 1 ]]; then
 	echo "Usage: $0 <version>"
 	exit 0
 fi
 
 VERSION="$1"
-if ! test -f ../tarball/love-${VERSION}-amd64.tar.gz; then
+if ! test -f ../tarball/love-${VERSION}-${ARCH}.tar.gz; then
 	echo "No tarball found for $VERSION"
 	exit 1
 fi
@@ -16,7 +18,7 @@ fi
 # Extract the tarball build into a folder
 rm -rf love-prepared
 mkdir love-prepared
-tar xf ../tarball/love-${VERSION}-amd64.tar.gz -C love-prepared --strip-components=1
+tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C love-prepared --strip-components=1
 
 cd love-prepared
 
@@ -32,4 +34,4 @@ sed -e "s/%VERSION%/$VERSION/" ../snap.yaml > meta/snap.yaml
 cp ../command-love.wrapper .
 
 # Finally, build it!
-mksquashfs . ../love_${VERSION}_amd64.snap -noappend
+mksquashfs . ../love_${VERSION}_${ARCH}.snap -noappend

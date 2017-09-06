@@ -6,8 +6,7 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION="$1"
-#ARCH="$(uname -m)"
-ARCH="amd64"
+ARCH="$(uname -m)"
 
 cd /build/love-linux-builder
 

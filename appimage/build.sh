@@ -1,8 +1,9 @@
 #!/bin/bash
 
-CURRENT_APPIMAGEKIT_RELEASE=9
-
 set -eo >/dev/null
+
+CURRENT_APPIMAGEKIT_RELEASE=9
+ARCH="$(uname -m)"
 
 if [[ $# -lt 1 ]]; then
 	echo "Usage: $0 <version>"
@@ -10,7 +11,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 VERSION="$1"
-if ! test -f ../tarball/love-${VERSION}-amd64.tar.gz; then
+if ! test -f ../tarball/love-${VERSION}-${ARCH}.tar.gz; then
 	echo "No tarball found for $VERSION"
 	exit 1
 fi
@@ -26,19 +27,19 @@ download_if_needed() {
 	fi
 }
 
-download_if_needed appimagetool-x86_64.AppImage
-download_if_needed AppRun-x86_64
+download_if_needed appimagetool-${ARCH}.AppImage
+download_if_needed AppRun-${ARCH}
 
 # Extract the tarball build into a folder
 rm -rf love-prepared
 mkdir love-prepared
-tar xf ../tarball/love-${VERSION}-amd64.tar.gz -C love-prepared --strip-components=1
+tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C love-prepared --strip-components=1
 
 cd love-prepared
 
 # Add our small wrapper script (yay, more wrappers), and AppRun
 cp ../wrapper usr/bin/wrapper-love
-cp ../AppRun-x86_64 AppRun
+cp ../AppRun-${ARCH} AppRun
 
 # Add our desktop file
 sed -e 's/%BINPREFIX%/wrapper-/' -e 's/%ICONPREFIX%//' love.desktop.in > love.desktop
@@ -51,5 +52,5 @@ cp love.svg .DirIcon
 cd ..
 
 # Work around missing FUSE/docker
-./appimagetool-x86_64.AppImage --appimage-extract
-./squashfs-root/AppRun love-prepared love-${VERSION}-x86_64.AppImage
+./appimagetool-${ARCH}.AppImage --appimage-extract
+./squashfs-root/AppRun love-prepared love-${VERSION}-${ARCH}.AppImage
