@@ -76,7 +76,7 @@ buildflatpak() {
 	popd
 }
 
-if ! test -f "love-${VERSION}-${ARCH}.tar.gz"; then
+if ! test -f "tarball/love-${VERSION}-${ARCH}.tar.gz"; then
 	msg "Building love"
 	buildlove
 	buildtarball
