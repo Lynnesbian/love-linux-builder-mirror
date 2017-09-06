@@ -9,7 +9,7 @@ RUN cd /tmp/SDL2-2.0.5 && ./configure --prefix=/usr && make all install
 
 # And build luajit
 ADD LuaJIT-2.0.5.tar.gz /tmp/
-RUN cd /tmp/LuaJIT-2.0.5 && make all install
+RUN cd /tmp/LuaJIT-2.0.5 && make PREFIX=/usr all install
 
 # Add the build script
 ADD build.sh /build/
