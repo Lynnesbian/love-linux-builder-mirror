@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CURRENT_APPIMAGEKIT_RELEASE=9
+
 set -eo >/dev/null
 
 if [[ $# -lt 1 ]]; then
@@ -15,7 +17,7 @@ fi
 
 download_if_needed() {
 	if ! test -f "$1"; then
-		if ! curl -L -o "$1" https://github.com/probonopd/AppImageKit/releases/download/continuous/"$1"; then
+		if ! curl -L -o "$1" "https://github.com/AppImage/AppImageKit/releases/download/${CURRENT_APPIMAGEKIT_RELEASE}/$1"; then
 			echo "Failed to download appimagetool"
 			echo "Please supply it manually"
 			exit 1
@@ -25,7 +27,7 @@ download_if_needed() {
 }
 
 download_if_needed appimagetool-x86_64.AppImage
-download_if_needed AppRun
+download_if_needed AppRun-x86_64
 
 # Extract the tarball build into a folder
 rm -rf love-prepared
@@ -36,7 +38,7 @@ cd love-prepared
 
 # Add our small wrapper script (yay, more wrappers), and AppRun
 cp ../wrapper usr/bin/wrapper-love
-cp ../AppRun .
+cp ../AppRun-x86_64 AppRun
 
 # Add our desktop file
 sed -e 's/%BINPREFIX%/wrapper-/' -e 's/%ICONPREFIX%//' love.desktop.in > love.desktop
@@ -47,4 +49,7 @@ cp love.svg .DirIcon
 
 # Now build the final AppImage
 cd ..
-./appimagetool-x86_64.AppImage love-prepared love-${VERSION}-x86_64.AppImage
+
+# Work around missing FUSE/docker
+./appimagetool-x86_64.AppImage --appimage-extract
+./squashfs-root/AppRun love-prepared love-${VERSION}-x86_64.AppImage
