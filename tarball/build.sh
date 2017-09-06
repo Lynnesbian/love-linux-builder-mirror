@@ -70,7 +70,7 @@ main()
 		printf '#!/bin/sh\n'
 		printf 'export LOVE_LAUNCHER_LOCATION="$(dirname "$(which "$0")")"\n'
 		printf 'export LD_LIBRARY_PATH="%s:$LD_LIBRARY_PATH"\n' "$libpath"
-		printf 'ldconfig -p | grep -q libstdc++ || export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${LOVE_LAUNCHER_LOCATION}/libstdc++/"\n'
+		printf '/sbin/ldconfig -p | grep -q libstdc++ || export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${LOVE_LAUNCHER_LOCATION}/libstdc++/"\n'
 		printf 'exec ${LOVE_BIN_WRAPPER} "${LOVE_LAUNCHER_LOCATION}%s" "$@"\n' "$appbin"
 	) > "$DEST/$appname"
 	chmod +x "$DEST/$appname"
