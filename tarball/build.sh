@@ -49,12 +49,13 @@ main()
 	copy "$appbin"
 	for dep in $(getdeps "$appbin"); do
 		copy "$dep"
-	done
 
-	# Copy libstdc++ into its own location
-	echo "Copying libstdc++"
-	mkdir -p "$DEST/libstdc++/"
-	cp "/usr/lib/x86_64-linux-gnu/libstdc++.so.6" "$DEST/libstdc++/" # TODO: find libstdc++ on host
+		# Copy libstdc++ into its own location
+		if grep -qF 'libstdc++.so.6' <<< "$dep"; then
+			mkdir -p "$DEST/libstdc++/"
+			cp "$dep" "$DEST/libstdc++/"
+		fi
+	done
 
 	# Build LD_LIBRARY_PATH string
 	local libpath=""
