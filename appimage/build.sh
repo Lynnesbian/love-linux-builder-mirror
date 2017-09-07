@@ -42,7 +42,7 @@ cp ../wrapper usr/bin/wrapper-love
 cp ../AppRun-${ARCH} AppRun
 
 # Add our desktop file
-sed -e 's/%BINPREFIX%/wrapper-/' -e 's/%ICONPREFIX%//' love.desktop.in > love.desktop
+sed -e 's/%BINARY%/wrapper-love/' -e 's/%ICON%/love/' love.desktop.in > love.desktop
 rm love.desktop.in
 
 # Add a DirIcon

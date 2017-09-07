@@ -26,7 +26,7 @@ cd love-prepared
 # First, our icon and desktop file
 mkdir -p meta/gui
 mv love.svg meta/gui/icon.svg
-sed -e 's/%BINPREFIX%//' -e '/%ICONPREFIX%/d' love.desktop.in > meta/gui/love.desktop
+sed -e 's/%BINARY%/love/' -e '/%ICON%/d' love.desktop.in > meta/gui/love.desktop
 rm love.desktop.in
 
 # Now the yaml and launcher

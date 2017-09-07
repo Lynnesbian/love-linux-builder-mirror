@@ -31,8 +31,10 @@ cd files
 mkdir -p bin
 cp ../wrapper bin/wrapper
 
+mkdir -p ../export
+
 # Add our desktop file
-sed -e 's/%BINPREFIX%love/wrapper/' -e 's/%ICONPREFIX%/org.love2d./' love.desktop.in > ../export/org.love2d.love.desktop
+sed -e 's/%BINARY%/wrapper/' -e 's/%ICON%/org.love2d.love/' love.desktop.in > ../export/org.love2d.love.desktop
 rm love.desktop.in
 
 # "Install" the icon
