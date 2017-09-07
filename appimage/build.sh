@@ -27,30 +27,61 @@ download_if_needed() {
 	fi
 }
 
-download_if_needed appimagetool-${ARCH}.AppImage
-download_if_needed AppRun-${ARCH}
+main() {
+	download_if_needed appimagetool-${ARCH}.AppImage
+	download_if_needed AppRun-${ARCH}
 
-# Extract the tarball build into a folder
-rm -rf love-prepared
-mkdir love-prepared
-tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C love-prepared --strip-components=1
+	# Extract the tarball build into a folder
+	rm -rf love-prepared
+	mkdir love-prepared
+	tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C love-prepared --strip-components=1
 
-cd love-prepared
+	cd love-prepared
 
-# Add our small wrapper script (yay, more wrappers), and AppRun
-cp ../wrapper usr/bin/wrapper-love
-cp ../AppRun-${ARCH} AppRun
+	# Add our small wrapper script (yay, more wrappers), and AppRun
+	cp ../wrapper usr/bin/wrapper-love
+	cp ../AppRun-${ARCH} AppRun
 
-# Add our desktop file
-sed -e 's/%BINARY%/wrapper-love/' -e 's/%ICON%/love/' love.desktop.in > love.desktop
-rm love.desktop.in
+	local desktopfile="love.desktop"
+	local icon="love"
+	local target="love-${VERSION}"
 
-# Add a DirIcon
-cp love.svg .DirIcon
+	if test -f ../../game.desktop.in; then
+		desktopfile="game.desktop"
+		cp ../../game.desktop.in .
+	fi
+	if test -f ../../game.svg; then
+		icon="game"
+		cp ../../game.svg .
+	fi
+	if test -f ../../game.love; then
+		target="game"
+		cat usr/bin/love ../../game.love > usr/bin/love-fused
+		mv usr/bin/love-fused usr/bin/love
+		chmod +x usr/bin/love
+	fi
 
-# Now build the final AppImage
-cd ..
+	# Add our desktop file
+	sed -e 's/%BINARY%/wrapper-love/' -e "s/%ICON%/${icon}/" "${desktopfile}.in" > "$desktopfile"
+	rm "${desktopfile}.in"
 
-# Work around missing FUSE/docker
-./appimagetool-${ARCH}.AppImage --appimage-extract
-./squashfs-root/AppRun love-prepared love-${VERSION}-${ARCH}.AppImage
+	# Add a DirIcon
+	cp "${icon}.svg" .DirIcon
+
+	# Clean up
+	if test -f ../../game.desktop.in; then
+		rm love.desktop.in
+	fi
+	if test -f ../../game.svg; then
+		rm love.svg
+	fi
+
+	# Now build the final AppImage
+	cd ..
+
+	# Work around missing FUSE/docker
+	./appimagetool-${ARCH}.AppImage --appimage-extract
+	./squashfs-root/AppRun love-prepared "${target}-${ARCH}.AppImage"
+}
+
+main "$@"
