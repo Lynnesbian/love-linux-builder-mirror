@@ -79,6 +79,13 @@ main()
 	# Add our icon and prototype desktop file
 	cp "$appname.desktop.in" "$DEST"
 	cp "$appname.svg" "$DEST"
+
+	# And the license file, if it exists
+	if test -f "license.txt"; then
+		cp "license.txt" "$DEST"
+	else
+		echo "No license.txt file found, skipping"
+	fi
 }
 
 main love
