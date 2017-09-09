@@ -24,17 +24,13 @@ fi
 rm -rf files
 mkdir files
 tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C files --strip-components=1
-
 cd files
 
-# Add our small wrapper script (yay, more wrappers)
-mkdir -p bin
-cp ../wrapper bin/wrapper
-
+# The export dir contains metadata for the host
 mkdir -p ../export
 
 # Add our desktop file
-sed -e 's/%BINARY%/wrapper/' -e 's/%ICON%/org.love2d.love/' love.desktop.in > ../export/org.love2d.love.desktop
+sed -e 's|%BINARY%|/app/love|' -e 's/%ICON%/org.love2d.love/' love.desktop.in > ../export/org.love2d.love.desktop
 rm love.desktop.in
 
 # "Install" the icon

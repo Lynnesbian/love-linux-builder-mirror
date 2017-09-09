@@ -2,17 +2,17 @@
 name=org.love2d.love
 runtime=org.freedesktop.Platform/x86_64/1.4
 sdk=org.freedesktop.Sdk/x86_64/1.4
-command=wrapper
+command=/app/love
 
 [Context]
 shared=network;
 sockets=x11;pulseaudio;session-bus;
 filesystem=xdg-data;
-device=dri;
+devices=dri;
 
 [Session Bus Policy]
 org.freedesktop.ScreenSaver=talk
 
 [Extension org.freedesktop.Platform.GL]
-version=1.2
+version=1.4
 directory=lib/GL
