@@ -1,5 +1,5 @@
 [Application]
-name=org.love2d.love
+name=%RDNS%
 runtime=org.freedesktop.Platform/x86_64/1.4
 sdk=org.freedesktop.Sdk/x86_64/1.4
 command=/app/love

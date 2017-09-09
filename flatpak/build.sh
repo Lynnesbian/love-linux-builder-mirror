@@ -27,20 +27,49 @@ tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C files --strip-components=1
 cd files
 
 # The export dir contains metadata for the host
-mkdir -p ../export
+rm -r ../export
+mkdir ../export
+
+# If we're packaging a game, move its data in place and extract the relevant metadata
+target="love-${VERSION}"
+targetversion="$VERSION"
+rdns="org.love2d.love"
+
+if test -f ../../game.rdns && test -f ../../game.version; then
+	rdns="$(cat ../../game.rdns)"
+	targetversion="$(cat ../../game.version)"
+
+	if test -f ../../game.desktop.in; then
+		cp ../../game.desktop.in love.desktop.in
+	fi
+
+	if test -f ../../game.svg; then
+		cp ../../game.svg love.svg
+	fi
+
+	if test -f ../../game.love; then
+		target="game"
+		cat usr/bin/love ../../game.love > usr/bin/love-fused
+		mv usr/bin/love-fused usr/bin/love
+		chmod +x usr/bin/love
+	fi
+fi
 
 # Add our desktop file
-sed -e 's|%BINARY%|/app/love|' -e 's/%ICON%/org.love2d.love/' love.desktop.in > ../export/org.love2d.love.desktop
+sed -e 's|%BINARY%|/app/love|' -e "s/%ICON%/${rdns}/" love.desktop.in > "../export/${rdns}.desktop"
 rm love.desktop.in
 
 # "Install" the icon
-mv love.svg ../export/org.love2d.love.svg
+mv love.svg "../export/${rdns}.svg"
 
-# Make sure app/lib/GL exists, for the extension mount point
+# Make sure app/lib/GL exists, for the extension mount point (no longer needed?)
 mkdir -p lib/GL
 
-# Now build the final AppImage
+# Process metadata.in
 cd ..
+sed -e "s/%RDNS%/${rdns}/" metadata.in > metadata
+
+# Now build the final AppImage
 #rm -rf repo
-flatpak build-export repo . ${VERSION}
-flatpak build-bundle repo love-${VERSION}-${ARCH}.flatpak org.love2d.love $VERSION
+flatpak build-export repo . "$targetversion"
+flatpak build-bundle repo "${target}-${ARCH}.flatpak" "$rdns" "$targetversion"
