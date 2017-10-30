@@ -3,6 +3,7 @@
 set -eo >/dev/null
 
 ARCH="$(uname -m)"
+REPO="${REPO:-repo}"
 
 if [[ $# -lt 1 ]]; then
 	echo "Usage: $0 <version>"
@@ -71,5 +72,5 @@ sed -e "s/%RDNS%/${rdns}/" metadata.in > metadata
 
 # Now build the final AppImage
 #rm -rf repo
-flatpak build-export repo . "$targetversion"
-flatpak build-bundle repo "${target}-${ARCH}.flatpak" "$rdns" "$targetversion"
+flatpak build-export "$REPO" . "$targetversion"
+flatpak build-bundle "$REPO" "${target}-${ARCH}.flatpak" "$rdns" "$targetversion"
