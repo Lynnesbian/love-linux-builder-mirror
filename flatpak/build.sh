@@ -28,7 +28,7 @@ tar xf ../tarball/love-${VERSION}-${ARCH}.tar.gz -C files --strip-components=1
 cd files
 
 # The export dir contains metadata for the host
-rm -r ../export
+rm -rf ../export
 mkdir ../export
 
 # If we're packaging a game, move its data in place and extract the relevant metadata
