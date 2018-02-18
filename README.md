@@ -6,6 +6,8 @@ This project is split up into multiple parts, and each part is responsible for
 a different build. Note that the `tarball` build is used as a base for the
 other builds.
 
+See [Getting Started][] for more information on how to use these scripts.
+
 ## tarball ##
 `tarball` contains a build script that extracts the love version currently
 installed on the system together with its dependencies to form a portable
@@ -20,8 +22,9 @@ to do everything for you, why not just do it manually?! Seriously though, you
 can still use snapcraft to build this, but at that point it just acts like a
 fancy mksquashfs, and an extra dependency at that.
 
-NOTE: I haven't been able to run the built snaps yet, but that seems to be a
-driver issue, possibly related to Arch Linux. Let me know if it works for you!
+NOTE: Due to nvidia driver issues I haven't been able to test these snaps yet.
+From what I can tell these issues have been fixed since the last time I tried.
+Let me know if you get them working so I can remove this note.
 
 ## appimage ##
 `appimage` builds [AppImages][AppImage], unsurprisingly. It uses binaries from
@@ -32,9 +35,6 @@ this actually seems to work, too!
 `flatpak` is used to build [flatpak][] "packages". It requires the flatpak
 command line tool. Of course flatpak has some kind of repo system, so you can't
 easily distribute a flatpak file. Useful.
-
-NOTE: Once again driver issues (blame nvidia) prevent me from testing this
-myself. If you get it working, let me know!
 
 ## docker ##
 `docker` does not build docker images. Instead it builds a docker image so you
@@ -54,3 +54,4 @@ branch or commit.
 [AppImage]: http://appimage.org/
 [AppImageKit]: https://github.com/probonopd/AppImageKit
 [flatpak]: http://flatpak.org/
+[Getting Started]: Getting%20Started.md
