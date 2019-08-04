@@ -4,8 +4,8 @@ FROM i386/debian:wheezy
 RUN apt-get update && apt-get install -y build-essential libgl1-mesa-glx libgles2-mesa-dev libxrandr-dev libdbus-1-dev libxi-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libibus-1.0-dev libasound2-dev libpulse-dev libwayland-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config
 
 # Now build sdl
-ADD SDL2-2.0.7.tar.gz /tmp/
-RUN cd /tmp/SDL2-2.0.7 && ./configure --prefix=/usr && make all install
+ADD SDL2-2.0.10.tar.gz /tmp/
+RUN cd /tmp/SDL2-2.0.10 && ./configure --prefix=/usr && make all install
 
 # And build luajit
 ADD LuaJIT-2.0.5.tar.gz /tmp/
