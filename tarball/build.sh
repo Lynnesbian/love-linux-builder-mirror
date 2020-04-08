@@ -84,7 +84,8 @@ main()
 	if test -f "license.txt"; then
 		cp "license.txt" "$DEST"
 	else
-		echo "No license.txt file found, skipping"
+		echo "No license.txt file found, downloading from GitHub"
+		curl "https://raw.githubusercontent.com/love2d/love/${VERSION}/license.txt" -o "$DEST/license.txt"
 	fi
 }
 
