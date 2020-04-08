@@ -1,7 +1,7 @@
 FROM arm32v7/debian:jessie
 
 # Install all sdl, love (build) deps and love-linux-builder deps
-RUN apt-get update && apt-get install -y build-essential cmake libibus-1.0-dev libasound2-dev libpulse-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config libdevil-dev 
+RUN apt-get update && apt-get install -y build-essential cmake libibus-1.0-dev libasound2-dev libpulse-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config libdevil-dev luajit libsdl2-dev libopenal1 libluajit-5.1-dev flatpak
 
 # install the new stuff
 RUN apt-get install -y luajit libsdl2-dev libopenal1 libluajit-5.1-dev

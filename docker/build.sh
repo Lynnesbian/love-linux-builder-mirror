@@ -69,9 +69,6 @@ buildflatpak() {
 
 	./build.sh "${VERSION}"
 
-	msg "Flatpak is not supported at the moment (oops)"
-	msg "  It does not build on this old version of debian"
-
 	popd
 }
 

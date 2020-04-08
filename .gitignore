@@ -8,6 +8,7 @@ appimage/squashfs-root/
 flatpak/repo/
 flatpak/files/
 flatpak/export/
+flatpak/*.flatpak
 /game.love
 /game.desktop.in
 /game.svg
