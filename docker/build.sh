@@ -14,6 +14,9 @@ msg() {
 	printf "\033[1m· %s\033[0m\n" "$1"
 }
 
+# print the linux version being used
+msg "Building with `lsb_release -ds`"
+
 buildlove() {
 	pushd ../love
 

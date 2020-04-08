@@ -3,13 +3,27 @@ love-linux-git
 ## This is a fork!
 This project was forked from [the original BitBucket repo](https://bitbucket.org/bartbes/love-linux-builder/), which hasn't been updated in some time. Currently, the Docker image provided by that repo fails to build, as the Mercurial version that it tries to use dies when connecting to bitbucket.org because it can't complete the SSLv3 handshake (which is a good thing). I've fixed this by updating the Dockerfile to use [Debian OldStable](https://wiki.debian.org/DebianOldStable) instead of [Debian Jessie](https://wiki.debian.org/LTS/Jessie). As of the time of writing, Debian OldStable is [Debian Stretch](https://wiki.debian.org/DebianStretch). Debian Stretch was originally released 3 years ago, and uses Linux kernel version 4.9, meaning that any Löve binaries created should be compatible with any Linux system that was updated within the last 3 or so years.
 
-## License
+## Usage
+The easiest way to use this project is with Docker.
+```bash
+# clone the repo
+git clone https://git.bune.city/lynnesbian/love-linux-builder
+# run the docker image
+REPO_PATH=love-linux-builder # the path to the git repo you just cloned
+TARGET_ARCH=x86_64 # the target architecture. one of: x86_64 (aka amd64), i686 (aka x86, i386), armv7l (raspberry pi)
+LOVE_VERSION=11.3 # the löve version you want to use
+docker run --rm -v $REPO_PATH:/build/love-linux-builder lynnesbian/love-linux-builder:$TARGET_ARCH $LOVE_VERSION
+```
 
+A list of available löve versions can be found [on the love2d wiki](https://love2d.org/wiki/Version_History).
+
+## License
 The original repo did not provide a license, meaning by default it is copyrighted by the author. I assume that the author did not intend this, and am releasing this fork under the MIT license. Please don't sue me!
 
 ## The rest
-
 The original README is as follows:
+
+---
 
 The script in this git repository can be used (on a sufficiently old linux
 system) to extract LÓVE binaries, and turn them into a portable build in

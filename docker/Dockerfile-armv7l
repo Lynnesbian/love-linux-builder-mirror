@@ -1,19 +1,19 @@
 FROM arm32v7/debian:jessie
 
 # Install all sdl, love (build) deps and love-linux-builder deps
-RUN apt-get update && apt-get install -y build-essential cmake libgl1-mesa-glx libgles2-mesa-dev libxrandr-dev libdbus-1-dev libxi-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libibus-1.0-dev libasound2-dev libpulse-dev libwayland-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config libdevil-dev
+RUN apt-get update && apt-get install -y build-essential cmake libgl1-mesa-glx libgles2-mesa-dev libxrandr-dev libdbus-1-dev libxi-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libibus-1.0-dev libasound2-dev libpulse-dev libwayland-dev libfreetype6-dev libopenal-dev libmodplug-dev libvorbis-dev libtheora-dev libphysfs-dev libmpg123-dev squashfs-tools curl mercurial libfuse2 autotools-dev automake libtool pkg-config libdevil-dev luajit libsdl2-2.0-0 libopenal1
 
 # Now build sdl
-ADD SDL2-2.0.10.tar.gz /tmp/
-RUN cd /tmp/SDL2-2.0.10 && ./configure --prefix=/usr && make all install
+# ADD SDL2-2.0.10.tar.gz /tmp/
+# RUN cd /tmp/SDL2-2.0.10 && ./configure --prefix=/usr && make all install
 
 # And build luajit
-ADD LuaJIT-2.0.5.tar.gz /tmp/
-RUN cd /tmp/LuaJIT-2.0.5 && make PREFIX=/usr all install
+# ADD LuaJIT-2.0.5.tar.gz /tmp/
+# RUN cd /tmp/LuaJIT-2.0.5 && make PREFIX=/usr all install
 
 # And build a modern openal soft
-ADD openal-soft-1.19.1.tar.gz /tmp/
-RUN cd /tmp/openal-soft-openal-soft-1.19.1/build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make all install
+# ADD openal-soft-1.19.1.tar.gz /tmp/
+# RUN cd /tmp/openal-soft-openal-soft-1.19.1/build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make all install
 
 # Add the build script
 ADD build.sh /build/
