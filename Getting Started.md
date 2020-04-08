@@ -120,6 +120,7 @@ pre-installed.
 The AppImage and Flatpak scripts provide customisation points so you can build
 distributions of your game instead. All these files need to go in the root
 directory of the repo.
+> Note from lynnesbian: This means that if you cloned this repo to `/home/you/love-linux-builder`, then the files below should *also* be in `/home/you/love-linux-builder`.
 
 Both AppImage and Flatpak:
 
@@ -141,6 +142,8 @@ Flatpak only:
    Please be a nice citizen of the internet and use your own domain name.
 
  - `game.version`: A version number to display in the application metadata.
+
+> Note from lynnesbian: These files are **required** to include your game in the Flatpak - without them, the generated Flatpak will just execute löve without running your game, as if you had executed `love` instead of `love game.love`!
 
 For Snap users there is no inbuilt customisation at the moment. You can modify `snap/snap.yaml`.
 
