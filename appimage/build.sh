@@ -2,7 +2,7 @@
 
 set -eo >/dev/null
 
-CURRENT_APPIMAGEKIT_RELEASE=9
+CURRENT_APPIMAGEKIT_RELEASE=12
 ARCH="$(uname -m)"
 
 if [[ $# -lt 1 ]]; then
